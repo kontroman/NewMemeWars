@@ -35,10 +35,14 @@ public class FirstPersonController : MonoBehaviour
         GetTouchInput();
 
         if (rightFingerId != -1)
+        {
             LookAround();
+        }
 
         if (leftFingerId != -1)
+        {
             Move();
+        }
     }
 
     void GetTouchInput()
@@ -56,29 +60,37 @@ public class FirstPersonController : MonoBehaviour
                         moveTouchStartPosition = t.position;
                     }
                     else if (t.position.x > halfScreenWidth && rightFingerId == -1)
+                    {
                         rightFingerId = t.fingerId;
+                    }
                 break;
-
                 case TouchPhase.Ended:
 
                 case TouchPhase.Canceled:
                     if (t.fingerId == leftFingerId)
+                    {
                         leftFingerId = -1;
-
+                    }
                     else if (t.fingerId == rightFingerId)
-                        Debug.Log("Stopped tracking right finger");
+                    {
+                        rightFingerId = -1;
+                    }
                 break;
-
                 case TouchPhase.Moved:
                     if (t.fingerId == rightFingerId)
+                    {
                         lookInput = t.deltaPosition * cameraSensitivity * Time.deltaTime;
+                    }
                     else if (t.fingerId == leftFingerId)
+                    {
                         moveInput = t.position - moveTouchStartPosition;
+                    }
                 break;
-
                 case TouchPhase.Stationary:
                     if (t.fingerId == rightFingerId)
+                    {
                         lookInput = Vector2.zero;
+                    }
                 break;
             }
         }
