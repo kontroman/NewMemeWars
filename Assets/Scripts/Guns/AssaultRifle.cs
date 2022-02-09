@@ -6,6 +6,6 @@ public class AssaultRifle : Weapon
 {
     protected override void Update()
     {
-        base.FireWeapon();
+        base.Update();
     }
 }

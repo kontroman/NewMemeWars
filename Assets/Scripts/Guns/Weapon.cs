@@ -54,6 +54,9 @@ public abstract class Weapon : MonoBehaviour
         {
             if (weaponMags > 0)
             {
+                if (!weaponReloading)
+                    weaponAudioSource.PlayOneShot(weaponAudioReloadClip);
+
                 weaponReloadTimer += Time.deltaTime;
                 weaponReloading = true;
 
@@ -78,11 +81,12 @@ public abstract class Weapon : MonoBehaviour
             {
                 weaponIsFiring = true;
 
+                weaponAmmoInClip -= 1;
+
                 Ray weaponRay = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
                 RaycastHit weaponRayHit;
 
-                //Звук стрельбы?
-                AudioManager.Instance.PlaySound(SoundType.Shot);
+                weaponAudioSource.PlayOneShot(weaponAudioFireClip);
 
                 Debug.DrawRay(weaponRay.origin, weaponRay.direction * 200, Color.red, 0.2f);
 

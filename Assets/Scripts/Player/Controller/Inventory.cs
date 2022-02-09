@@ -18,7 +18,6 @@ public class Inventory : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             
-            //Shoot();
         }
     }
 
