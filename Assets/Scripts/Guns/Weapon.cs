@@ -27,6 +27,8 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected AudioClip weaponAudioFireClip;
     [SerializeField] protected AudioClip weaponAudioReloadClip;
 
+    [SerializeField] ParticleSystem muzzleFlash;
+
     public float timer;
     public bool weaponReloading;
     public bool weaponIsFiring;
@@ -87,6 +89,7 @@ public abstract class Weapon : MonoBehaviour
                 RaycastHit weaponRayHit;
 
                 weaponAudioSource.PlayOneShot(weaponAudioFireClip);
+                muzzleFlash.Play();
 
                 Debug.DrawRay(weaponRay.origin, weaponRay.direction * 200, Color.red, 0.2f);
 
