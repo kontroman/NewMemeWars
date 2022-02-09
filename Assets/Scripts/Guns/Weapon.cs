@@ -68,6 +68,7 @@ public abstract class Weapon : MonoBehaviour
                     weaponAmmoInClip = weaponClipSize;
                     weaponReloading = !weaponReloading;
                     weaponReloadTimer = 0f;
+                    GameObject.Find("Canvas").GetComponent<GameCanvas>().UpdateAmmoText(weaponAmmoInClip);
                 }
             }
         }
@@ -83,7 +84,11 @@ public abstract class Weapon : MonoBehaviour
             {
                 weaponIsFiring = true;
 
+                //TODO: make -ammo event
+
                 weaponAmmoInClip -= 1;
+
+                GameObject.Find("Canvas").GetComponent<GameCanvas>().UpdateAmmoText(weaponAmmoInClip);
 
                 Ray weaponRay = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
                 RaycastHit weaponRayHit;
@@ -95,6 +100,11 @@ public abstract class Weapon : MonoBehaviour
 
                 if (Physics.Raycast(weaponRay, out weaponRayHit, 200))
                 {
+                    DamagePopupCreator.Instance.CreateText(new Vector3(
+                        weaponRayHit.transform.position.x,
+                        weaponRayHit.transform.position.y,
+                        weaponRayHit.transform.position.z
+                        ));
                     Debug.Log("Попали");
                 }
 

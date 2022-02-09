@@ -8,6 +8,7 @@ public class GameCanvas : MonoBehaviour
     public static GameCanvas Instance { get; private set; }
 
     public Text roundTimeText;
+    public Text AmmoText;
 
     private void Awake()
     {
@@ -21,5 +22,10 @@ public class GameCanvas : MonoBehaviour
         float seconds = Mathf.FloorToInt(time % 60);
 
         roundTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void UpdateAmmoText(int ammo)
+    {
+        AmmoText.text = "" + ammo;
     }
 }
