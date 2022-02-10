@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class AIStateManager : MonoBehaviour
 {
-    AIBaseState currentState;
-    AIPatrolState PatrolState = new AIPatrolState();
-    AIChaseState AIChaseState = new AIChaseState();
-    AIAttackState AIAttackState = new AIAttackState();
+    public AIBaseState currentState;
+    public AIPatrolState PatrolState = new AIPatrolState();
+    public AIChaseState AIChaseState = new AIChaseState();
+    public AIAttackState AIAttackState = new AIAttackState();
 
-
-    // Start is called before the first frame update
     void Start()
     {
         currentState = PatrolState;
@@ -18,9 +16,14 @@ public class AIStateManager : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentState.UpdateState(this);
+    }
+
+    public void SwitchState(AIBaseState state)
+    {
+        currentState = state;
+        state.EnterState(this);
     }
 }

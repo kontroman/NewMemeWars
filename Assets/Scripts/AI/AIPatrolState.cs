@@ -8,6 +8,7 @@ public class AIPatrolState : AIBaseState
 {
     List<Transform> waypoints = new List<Transform>();
 
+    private bool playerInSightRange;
     private GameObject waypointBase;
     private float rotationSpeed = 3;
     private Vector3 agentPosition;
@@ -39,8 +40,8 @@ public class AIPatrolState : AIBaseState
             SelectWaypointIndex(currentWaypointIndex);
             Debug.Log("yes");
         }
-
         RotateToTarget(targetWayPoint);
+
     }
     private void SelectWaypointIndex(int waypoint)
     {
