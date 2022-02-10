@@ -3,35 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     public enum WeaponType { NONE = 0, ASSAULT = 1, PISTOL = 2 };
 
-    [SerializeField] protected float weaponDamage;
-    [SerializeField] protected float weaponFireRate;
-    [SerializeField] protected float weaponReloadTime;
-    [SerializeField] protected float weaponVelocity;
-    [SerializeField] protected float weaponReloadTimer;
+    [SerializeField] private float weaponDamage;
+    [SerializeField] private float weaponFireRate;
+    [SerializeField] private float weaponReloadTime;
+    [SerializeField] private float weaponVelocity;
+    [SerializeField] private float weaponReloadTimer;
 
-    [SerializeField] protected int weaponType;
-    [SerializeField] protected int weaponClipSize;
-    [SerializeField] protected int weaponMaxClipSize;
-    [SerializeField] protected int weaponAmmoInClip;
-    [SerializeField] protected int weaponMags;
-    [SerializeField] protected int weaponMaxMags;
+    [SerializeField] private int weaponType;
+    [SerializeField] private int weaponClipSize;
+    [SerializeField] private int weaponMaxClipSize;
+    [SerializeField] private int weaponAmmoInClip;
+    [SerializeField] private int weaponMags;
+    [SerializeField] private int weaponMaxMags;
 
-    [SerializeField] protected string weaponName;
+    [SerializeField] private string weaponName;
 
-    [SerializeField] protected AudioSource weaponAudioSource;
+    [SerializeField] private AudioSource weaponAudioSource;
     //или воспроизводить звуки через менеджер?
-    [SerializeField] protected AudioClip weaponAudioFireClip;
-    [SerializeField] protected AudioClip weaponAudioReloadClip;
+    [SerializeField] private AudioClip weaponAudioFireClip;
+    [SerializeField] private AudioClip weaponAudioReloadClip;
+
+    [SerializeField] private ParticleSystem muzzleFlash;
+
+    private bool firing;
 
     public float timer;
     public bool weaponReloading;
     public bool weaponIsFiring;
 
-    protected virtual void Awake()
+    private void Awake()
     {
         weaponDamage = 10f;
         weaponFireRate = 0.1f;
@@ -40,20 +44,29 @@ public abstract class Weapon : MonoBehaviour
         weaponAmmoInClip = weaponMaxClipSize;
         weaponMags = weaponMaxMags;
 
-        //Проинициализировать звуки
+        weaponAudioSource = GetComponent<AudioSource>();
     }
-    protected virtual void Update()
+
+    public void InvokeFire()
+    {
+        firing = !firing;
+    }
+
+    private void Update()
     {
         FireWeapon();
         ReloadWeapon();
     }
 
-    protected virtual void ReloadWeapon()
+    private void ReloadWeapon()
     {
         if (weaponAmmoInClip <= 0)
         {
             if (weaponMags > 0)
             {
+                if (!weaponReloading)
+                    weaponAudioSource.PlayOneShot(weaponAudioReloadClip);
+
                 weaponReloadTimer += Time.deltaTime;
                 weaponReloading = true;
 
@@ -63,14 +76,15 @@ public abstract class Weapon : MonoBehaviour
                     weaponAmmoInClip = weaponClipSize;
                     weaponReloading = !weaponReloading;
                     weaponReloadTimer = 0f;
+                    GameObject.Find("Canvas").GetComponent<GameCanvas>().UpdateAmmoText(weaponAmmoInClip);
                 }
             }
         }
     }
 
-    protected virtual void FireWeapon()
+    private void FireWeapon()
     {
-        if (Input.GetMouseButton(0))
+        if (firing)
         {
             timer += Time.deltaTime;
 
@@ -78,16 +92,27 @@ public abstract class Weapon : MonoBehaviour
             {
                 weaponIsFiring = true;
 
+                //TODO: make -ammo event
+
+                weaponAmmoInClip -= 1;
+
+                GameObject.Find("Canvas").GetComponent<GameCanvas>().UpdateAmmoText(weaponAmmoInClip);
+
                 Ray weaponRay = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
                 RaycastHit weaponRayHit;
 
-                //Звук стрельбы?
-                AudioManager.Instance.PlaySound(SoundType.Shot);
+                weaponAudioSource.PlayOneShot(weaponAudioFireClip);
+                muzzleFlash.Play();
 
                 Debug.DrawRay(weaponRay.origin, weaponRay.direction * 200, Color.red, 0.2f);
 
                 if (Physics.Raycast(weaponRay, out weaponRayHit, 200))
                 {
+                    DamagePopupCreator.Instance.CreateText(new Vector3(
+                        weaponRayHit.transform.position.x,
+                        weaponRayHit.transform.position.y,
+                        weaponRayHit.transform.position.z
+                        ));
                     Debug.Log("Попали");
                 }
 
