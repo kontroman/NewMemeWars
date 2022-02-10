@@ -3,37 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     public enum WeaponType { NONE = 0, ASSAULT = 1, PISTOL = 2 };
 
-    [SerializeField] protected float weaponDamage;
-    [SerializeField] protected float weaponFireRate;
-    [SerializeField] protected float weaponReloadTime;
-    [SerializeField] protected float weaponVelocity;
-    [SerializeField] protected float weaponReloadTimer;
+    [SerializeField] private float weaponDamage;
+    [SerializeField] private float weaponFireRate;
+    [SerializeField] private float weaponReloadTime;
+    [SerializeField] private float weaponVelocity;
+    [SerializeField] private float weaponReloadTimer;
 
-    [SerializeField] protected int weaponType;
-    [SerializeField] protected int weaponClipSize;
-    [SerializeField] protected int weaponMaxClipSize;
-    [SerializeField] protected int weaponAmmoInClip;
-    [SerializeField] protected int weaponMags;
-    [SerializeField] protected int weaponMaxMags;
+    [SerializeField] private int weaponType;
+    [SerializeField] private int weaponClipSize;
+    [SerializeField] private int weaponMaxClipSize;
+    [SerializeField] private int weaponAmmoInClip;
+    [SerializeField] private int weaponMags;
+    [SerializeField] private int weaponMaxMags;
 
-    [SerializeField] protected string weaponName;
+    [SerializeField] private string weaponName;
 
-    [SerializeField] protected AudioSource weaponAudioSource;
+    [SerializeField] private AudioSource weaponAudioSource;
     //или воспроизводить звуки через менеджер?
-    [SerializeField] protected AudioClip weaponAudioFireClip;
-    [SerializeField] protected AudioClip weaponAudioReloadClip;
+    [SerializeField] private AudioClip weaponAudioFireClip;
+    [SerializeField] private AudioClip weaponAudioReloadClip;
 
-    [SerializeField] ParticleSystem muzzleFlash;
+    [SerializeField] private ParticleSystem muzzleFlash;
+
+    private bool firing;
 
     public float timer;
     public bool weaponReloading;
     public bool weaponIsFiring;
 
-    protected virtual void Awake()
+    private void Awake()
     {
         weaponDamage = 10f;
         weaponFireRate = 0.1f;
@@ -42,15 +44,21 @@ public abstract class Weapon : MonoBehaviour
         weaponAmmoInClip = weaponMaxClipSize;
         weaponMags = weaponMaxMags;
 
-        //ѕроинициализировать звуки
+        weaponAudioSource = GetComponent<AudioSource>();
     }
-    protected virtual void Update()
+
+    public void InvokeFire()
+    {
+        firing = !firing;
+    }
+
+    private void Update()
     {
         FireWeapon();
         ReloadWeapon();
     }
 
-    protected virtual void ReloadWeapon()
+    private void ReloadWeapon()
     {
         if (weaponAmmoInClip <= 0)
         {
@@ -74,9 +82,9 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    protected virtual void FireWeapon()
+    private void FireWeapon()
     {
-        if (Input.GetMouseButton(0))
+        if (firing)
         {
             timer += Time.deltaTime;
 

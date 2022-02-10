@@ -8,6 +8,11 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private Weapon currentWeapon;
 
+    public void UseWeapon()
+    {
+        currentWeapon.InvokeFire();
+    }
+
     private void Awake()
     {
 
@@ -15,10 +20,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            
-        }
+
     }
 
     private void Shoot()

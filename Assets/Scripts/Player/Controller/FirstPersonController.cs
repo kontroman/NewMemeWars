@@ -79,7 +79,12 @@ public class FirstPersonController : MonoBehaviour
                 case TouchPhase.Moved:
                     if (t.fingerId == rightFingerId)
                     {
-                        lookInput = t.deltaPosition * cameraSensitivity * Time.deltaTime;
+                        Vector2 delta = t.deltaPosition;
+
+                        if (Mathf.Abs(delta.x) <= .4f) delta.x = 0;
+                        if (Mathf.Abs(delta.y) <= .4f) delta.y = 0;
+
+                        lookInput = delta * cameraSensitivity * Time.deltaTime;
                     }
                     else if (t.fingerId == leftFingerId)
                     {
