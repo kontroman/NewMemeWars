@@ -6,20 +6,27 @@ using UnityEngine.AI;
 
 public class AIPatrolState : AIBaseState
 {
-    List<Transform> waypoints = new List<Transform>();
-
-    private bool playerInSightRange;
+    public AISightController sightController;
+    
     private GameObject waypointBase;
-    private float rotationSpeed = 3;
-    private Vector3 agentPosition;
+
     private NavMeshAgent agent;
+
     private Vector3 targetWayPoint;
+    private Vector3 agentPosition;
+
+    private float rotationSpeed = 3;
+
     private int currentWaypointIndex;
     private int newWaypointIndex;
+ 
     private Animator animator;
-   
+
+    List<Transform> waypoints = new List<Transform>();
+
     public override void EnterState(AIStateManager bot)
     {
+        sightController = bot.GetComponentInChildren<AISightController>();
         waypointBase = GameObject.Find("Waypoints");
         waypoints = waypointBase.GetComponentsInChildren<Transform>().Skip(1).ToList();
         animator = bot.GetComponent<Animator>();
@@ -36,23 +43,20 @@ public class AIPatrolState : AIBaseState
         agentPosition = bot.GetComponent<Transform>().position;
         if ((agentPosition - targetWayPoint).magnitude <= 2)
         {
-            Debug.Log("yes");
             SelectWaypointIndex(currentWaypointIndex);
-            Debug.Log("yes");
         }
         RotateToTarget(targetWayPoint);
-
+        if (sightController.enemiesInSight.Any())
+            bot.SwitchState(bot.ChaseState);
     }
+
     private void SelectWaypointIndex(int waypoint)
     {
         waypoint = currentWaypointIndex;
         newWaypointIndex = Random.Range(0, waypoints.Count);
         Debug.Log(newWaypointIndex);
         if (newWaypointIndex == waypoint)
-        {
             SelectWaypointIndex(currentWaypointIndex);
-            Debug.Log("No");
-        }
         else
             SetWaypoint(newWaypointIndex);
     }
@@ -61,7 +65,6 @@ public class AIPatrolState : AIBaseState
     {
         currentWaypointIndex = targetpoint;
         targetWayPoint = waypoints[currentWaypointIndex].position;
-        //  Debug.Log(targetWayPoint.position);
 
     }
     public void RotateToTarget(Vector3 target)

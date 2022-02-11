@@ -6,8 +6,8 @@ public class AIStateManager : MonoBehaviour
 {
     public AIBaseState currentState;
     public AIPatrolState PatrolState = new AIPatrolState();
-    public AIChaseState AIChaseState = new AIChaseState();
-    public AIAttackState AIAttackState = new AIAttackState();
+    public AIChaseState ChaseState = new AIChaseState();
+    public AIAttackState AttackState = new AIAttackState();
 
     void Start()
     {
@@ -16,7 +16,7 @@ public class AIStateManager : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         currentState.UpdateState(this);
     }

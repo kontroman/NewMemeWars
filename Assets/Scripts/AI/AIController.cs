@@ -12,6 +12,7 @@ public class AIController : MonoBehaviour
     private Vector3 agentPosition;
     private NavMeshAgent agent;
     private Vector3 targetWayPoint;
+
     private int currentWaypointIndex;
     private int newWaypointIndex;
     private Animator animator;
