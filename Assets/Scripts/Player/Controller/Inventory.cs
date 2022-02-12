@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-
+        HealthManager.Instance.DecreaseHealth(2);
     }
 
     private void Update()
