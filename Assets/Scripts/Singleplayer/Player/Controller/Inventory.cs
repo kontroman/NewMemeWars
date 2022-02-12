@@ -13,18 +13,10 @@ public class Inventory : MonoBehaviour
         currentWeapon.InvokeFire();
     }
 
-    private void Awake()
+    public void SetNewWeapon(Weapon _weapon)
     {
-        HealthManager.Instance.DecreaseHealth(2);
+        currentWeapon = _weapon;
+        Debug.Log("New weapon equiped");
     }
 
-    private void Update()
-    {
-
-    }
-
-    private void Shoot()
-    {
-        AudioManager.Instance.PlaySound(SoundType.Shot);
-    }
 }
