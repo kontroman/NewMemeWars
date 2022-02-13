@@ -13,16 +13,15 @@ public class GunWheel : MonoBehaviour
 
     public void SetWheelVisible(bool _bool)
     {
+        if (!StopGame.Instance.GameInProgress) return;
+
         StartCoroutine(WaitForWheels(_bool));
-        
-        //wheel1.SetActive(_bool);
-        //wheel2.SetActive(_bool);
-        //wheel3.SetActive(_bool);
     }
 
     IEnumerator WaitForWheels(bool _bool)
     {
         yield return new WaitForSeconds(0.05f);
+
         wheel1.SetActive(_bool);
         wheel2.SetActive(_bool);
         wheel3.SetActive(_bool);
@@ -30,19 +29,7 @@ public class GunWheel : MonoBehaviour
 
     public void SelectGun(Weapon weapon)
     {
+        AudioManager.Instance.PlaySound(SoundType.Equip);
         player.SetNewWeapon(weapon);
-    }
-
-    //TODO: disable wheels
-
-    public void TestPointerEnter()
-    {
-        Debug.Log("Mouse on object");
-    }
-
-    public void TestPointerUp()
-    {
-        Debug.Log("Weapon selected");
-        SetWheelVisible(false);
     }
 }

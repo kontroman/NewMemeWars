@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Important: keep sort order!
 public enum SoundType
 {
-    Shot
+    Shot,
+    Equip
 }
 
 public class AudioManager : MonoBehaviour

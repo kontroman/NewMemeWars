@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public enum WeaponType { NONE = 0, ASSAULT = 1, PISTOL = 2 };
+    public enum WeaponType { NONE = 0, ASSAULT = 1, DROBOVIK = 2, PULEMET = 3 };
 
-    [SerializeField] private float weaponDamage;
-    [SerializeField] private float weaponFireRate;
-    [SerializeField] private float weaponReloadTime;
-    [SerializeField] private float weaponVelocity;
-    [SerializeField] private float weaponReloadTimer;
+    [SerializeField] private float weaponDamage = 10f;
+    [SerializeField] private float weaponFireRate = 0.05f;
+    [SerializeField] private float weaponReloadTime = 1.5f;
+    [SerializeField] private float weaponVelocity = 1f;
+    [SerializeField] private float weaponReloadTimer = 0f;
 
-    [SerializeField] private int weaponType;
-    [SerializeField] private int weaponClipSize;
-    [SerializeField] private int weaponMaxClipSize;
-    [SerializeField] private int weaponAmmoInClip;
-    [SerializeField] private int weaponMags;
-    [SerializeField] private int weaponMaxMags;
+    [SerializeField] private int weaponType = 1;
+    [SerializeField] private int weaponClipSize = 30;
+    [SerializeField] private int weaponMaxClipSize = 30;
+    [SerializeField] private int weaponAmmoInClip = 30;
+    [SerializeField] private int weaponMags = 10;
+    [SerializeField] private int weaponMaxMags = 10;
 
     [SerializeField] private string weaponName;
 
@@ -37,13 +37,6 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        weaponDamage = 10f;
-        weaponFireRate = 0.1f;
-        weaponReloadTime = 1.3f;
-        weaponType = 1;
-        weaponAmmoInClip = weaponMaxClipSize;
-        weaponMags = weaponMaxMags;
-
         weaponAudioSource = GetComponent<AudioSource>();
     }
 
@@ -58,8 +51,15 @@ public class Weapon : MonoBehaviour
         ReloadWeapon();
     }
 
+    public void OnEnable()
+    {
+        GameObject.Find("Canvas").GetComponent<GameCanvas>().UpdateAmmoText(weaponAmmoInClip);
+    }
+
     private void ReloadWeapon()
     {
+        if (!StopGame.Instance.GameInProgress) return;
+
         if (weaponAmmoInClip <= 0)
         {
             if (weaponMags > 0)
@@ -84,6 +84,8 @@ public class Weapon : MonoBehaviour
 
     private void FireWeapon()
     {
+        if (!StopGame.Instance.GameInProgress) return;
+
         if (firing)
         {
             timer += Time.deltaTime;
@@ -108,12 +110,17 @@ public class Weapon : MonoBehaviour
 
                 if (Physics.Raycast(weaponRay, out weaponRayHit, 200))
                 {
-                    DamagePopupCreator.Instance.CreateText(new Vector3(
-                        weaponRayHit.transform.position.x,
-                        weaponRayHit.transform.position.y,
-                        weaponRayHit.transform.position.z
-                        ));
-                    Debug.Log("Попали");
+                    if(weaponRayHit.transform.gameObject.TryGetComponent(out Health targetHealth))
+                    {
+                        DamagePopupCreator.Instance.CreateText(new Vector3(
+                            weaponRayHit.transform.position.x,
+                            weaponRayHit.transform.position.y,
+                            weaponRayHit.transform.position.z
+                            ),
+                            weaponDamage);
+
+                        targetHealth.TakeDamage(weaponDamage);
+                    }
                 }
 
                 timer = 0f;

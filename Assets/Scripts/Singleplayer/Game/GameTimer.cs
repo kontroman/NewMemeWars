@@ -11,7 +11,7 @@ public class GameTimer : MonoBehaviour
     private bool paused = true;
 
     [SerializeField]
-    UnityEvent onGameStop;
+    public UnityEvent onGameStop;
 
     public event Action onGameStopAction;
 

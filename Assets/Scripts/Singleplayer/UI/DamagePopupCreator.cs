@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DamagePopupCreator : MonoBehaviour
 {
@@ -14,8 +15,9 @@ public class DamagePopupCreator : MonoBehaviour
         else Instance = this;
     }
 
-    public void CreateText(Vector3 position)
+    public void CreateText(Vector3 position, float weaponDamage)
     {
-        Instantiate(DamageText, position, Quaternion.identity);
+        GameObject text = Instantiate(DamageText, position, Quaternion.identity);
+        text.transform.GetChild(0).GetComponent<Text>().text = "" + weaponDamage;
     }
 }
