@@ -25,12 +25,12 @@ public class HealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        HealthComponent.onHealthChange += HealthChangerHandler;
+        HealthComponent.onHealthChangedAction += HealthChangerHandler;
     }
 
     private void OnDisable()
     {
-        HealthComponent.onHealthChange -= HealthChangerHandler;
+        HealthComponent.onHealthChangedAction -= HealthChangerHandler;
     }
 
     private void Update()

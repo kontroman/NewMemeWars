@@ -33,7 +33,6 @@ public class AIPatrolState : AIBaseState
         agent = bot.GetComponent<NavMeshAgent>();
         currentWaypointIndex = Random.Range(0, waypoints.Count);
         targetWayPoint = waypoints[currentWaypointIndex].position;
-        Debug.Log(currentWaypointIndex);
     }
 
     public override void UpdateState(AIStateManager bot)
@@ -54,7 +53,6 @@ public class AIPatrolState : AIBaseState
     {
         waypoint = currentWaypointIndex;
         newWaypointIndex = Random.Range(0, waypoints.Count);
-        Debug.Log(newWaypointIndex);
         if (newWaypointIndex == waypoint)
             SelectWaypointIndex(currentWaypointIndex);
         else

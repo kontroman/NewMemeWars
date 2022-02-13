@@ -35,7 +35,7 @@ public class DamageIndicator : MonoBehaviour
         else if (timer > fraction) text.color = Color.Lerp(text.color, Color.clear, (timer - fraction) / (lifetime - fraction));
 
         transform.position = Vector3.Lerp(iniPos, targetPos, Mathf.Sin(timer / lifetime));
-        transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, Mathf.Sin(timer / lifetime));
+        transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one / 2, Mathf.Sin(timer / lifetime));
     }
 
     public void SetDamageText(int damage)

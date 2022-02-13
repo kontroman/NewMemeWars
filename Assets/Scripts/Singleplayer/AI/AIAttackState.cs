@@ -29,7 +29,6 @@ public class AIAttackState : AIBaseState
     public override void UpdateState(AIStateManager bot)
     {
         agent.transform.LookAt(target.transform);
-        Debug.Log("Стреляю!");
         inventory.UseWeapon();
         if ((agent.transform.position - target.transform.position).magnitude > attackRange)
         {
@@ -37,26 +36,12 @@ public class AIAttackState : AIBaseState
             {
                 agent.Resume();
                 bot.SwitchState(bot.ChaseState);
-                Debug.Log("Догоняю");
             }
             else
             {
                 agent.Resume();
                 bot.SwitchState(bot.PatrolState);
-                Debug.Log("Патрулирую");
             }
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
