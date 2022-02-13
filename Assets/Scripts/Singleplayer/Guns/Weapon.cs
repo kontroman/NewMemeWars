@@ -51,8 +51,15 @@ public class Weapon : MonoBehaviour
         ReloadWeapon();
     }
 
+    public void OnEnable()
+    {
+        GameObject.Find("Canvas").GetComponent<GameCanvas>().UpdateAmmoText(weaponAmmoInClip);
+    }
+
     private void ReloadWeapon()
     {
+        if (!StopGame.Instance.GameInProgress) return;
+
         if (weaponAmmoInClip <= 0)
         {
             if (weaponMags > 0)
@@ -77,6 +84,8 @@ public class Weapon : MonoBehaviour
 
     private void FireWeapon()
     {
+        if (!StopGame.Instance.GameInProgress) return;
+
         if (firing)
         {
             timer += Time.deltaTime;

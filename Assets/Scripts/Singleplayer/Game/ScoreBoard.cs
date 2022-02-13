@@ -8,6 +8,23 @@ public class ScoreBoard : Singleton<ScoreBoard>
 {
     public Dictionary<string, int> scoreboard = new Dictionary<string, int>();
 
+    [SerializeField] GameTimer timer;
+
+    private void OnEnable()
+    {
+        timer.onGameStopAction += OnGameStopHandler;
+    }
+
+    private void OnDisable()
+    {
+        timer.onGameStopAction -= OnGameStopHandler;
+    }
+
+    private void OnGameStopHandler()
+    {
+        //Debug.LogError("Winner has " + GetLeaderScore() + " kills!");
+    }
+
     public void AddNewPlayer(string playerName)
     {
         scoreboard.Add(playerName, 0);

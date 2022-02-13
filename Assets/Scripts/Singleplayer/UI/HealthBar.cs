@@ -18,15 +18,6 @@ public class HealthBar : MonoBehaviour
         healthBarImage.fillAmount = 1;
     }
 
-    private IEnumerator Start()
-    {
-        yield return new WaitForSeconds(2f);
-        HealthChangerHandler(80);
-        yield return new WaitForSeconds(2f);
-        HealthChangerHandler(23);
-
-    }
-
     private void OnEnable()
     {
         //HealthComponent.OnHealthChange += HealthChangerHandler;

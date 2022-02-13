@@ -33657,6 +33657,8 @@ GameObject:
   - component: {fileID: 1426479929}
   - component: {fileID: 1426479931}
   - component: {fileID: 1426479932}
+  - component: {fileID: 1426479934}
+  - component: {fileID: 1426479933}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -33676,7 +33678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4f83624766465489744c4dede69653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundTime: 600
+  roundTime: 20
   onGameStop:
     m_PersistentCalls:
       m_Calls: []
@@ -33723,6 +33725,32 @@ MonoBehaviour:
   wheel1: {fileID: 807803006}
   wheel2: {fileID: 340056597}
   wheel3: {fileID: 2014237274}
+--- !u!114 &1426479933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426479928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b237efdb6bdda40a0d37adbcc667f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 1426479929}
+--- !u!114 &1426479934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426479928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbcbe4c92be8e6488c318b371fe5d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1716935510}
 --- !u!1 &1428983880 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7113174032149328188, guid: 928c1862eba550045bc9922649153b9d, type: 3}
