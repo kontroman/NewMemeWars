@@ -110,12 +110,17 @@ public class Weapon : MonoBehaviour
 
                 if (Physics.Raycast(weaponRay, out weaponRayHit, 200))
                 {
-                    DamagePopupCreator.Instance.CreateText(new Vector3(
-                        weaponRayHit.transform.position.x,
-                        weaponRayHit.transform.position.y,
-                        weaponRayHit.transform.position.z
-                        ));
-                    Debug.Log("Попали");
+                    if(weaponRayHit.transform.gameObject.TryGetComponent(out Health targetHealth))
+                    {
+                        DamagePopupCreator.Instance.CreateText(new Vector3(
+                            weaponRayHit.transform.position.x,
+                            weaponRayHit.transform.position.y,
+                            weaponRayHit.transform.position.z
+                            ),
+                            weaponDamage);
+
+                        targetHealth.TakeDamage(weaponDamage);
+                    }
                 }
 
                 timer = 0f;
