@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    public Health HealthComponent;
+
+    public GameObject player;
+
     private Image healthBarImage;
 
     float actualValue = 1f;
@@ -14,6 +18,7 @@ public class HealthBar : MonoBehaviour
 
     private void Awake()
     {
+        HealthComponent = player.GetComponent<Health>();
         healthBarImage = GetComponent<Image>();
         healthBarImage.fillAmount = 1;
     }
@@ -29,12 +34,12 @@ public class HealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        //HealthComponent.OnHealthChange += HealthChangerHandler;
+        HealthComponent.onHealthChange += HealthChangerHandler;
     }
 
     private void OnDisable()
     {
-        //HealthComponent.OnHealthChange -= HealthChangerHandler;
+        HealthComponent.onHealthChange -= HealthChangerHandler;
     }
 
     private void Update()

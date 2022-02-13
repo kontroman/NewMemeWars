@@ -30,7 +30,7 @@ public class AIAttackState : AIBaseState
     {
         agent.transform.LookAt(target.transform);
         Debug.Log("Стреляю!");
-        //inventory.UseWeapon();
+        inventory.UseWeapon();
         if ((agent.transform.position - target.transform.position).magnitude > attackRange)
         {
             if (aISightController.enemiesInSight.Contains(target))
