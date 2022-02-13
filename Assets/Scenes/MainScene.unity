@@ -6004,13 +6004,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1426479932}
-          m_TargetAssemblyTypeName: GunWheel, Assembly-CSharp
-          m_MethodName: TestPointerEnter
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgumentAssemblyTypeName: 
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -6022,11 +6022,11 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1426479932}
           m_TargetAssemblyTypeName: GunWheel, Assembly-CSharp
-          m_MethodName: TestPointerUp
-          m_Mode: 1
+          m_MethodName: SelectGun
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 5917295281671154794}
+            m_ObjectArgumentAssemblyTypeName: Weapon, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -17406,13 +17406,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1426479932}
-          m_TargetAssemblyTypeName: GunWheel, Assembly-CSharp
-          m_MethodName: TestPointerEnter
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgumentAssemblyTypeName: 
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -17424,11 +17424,11 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1426479932}
           m_TargetAssemblyTypeName: GunWheel, Assembly-CSharp
-          m_MethodName: TestPointerUp
-          m_Mode: 1
+          m_MethodName: SelectGun
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 4371771000634318847}
+            m_ObjectArgumentAssemblyTypeName: Weapon, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -28128,6 +28128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - {fileID: 8300000, guid: db23fd8a70d1fbe498924cf686d94ba1, type: 3}
+  - {fileID: 8300000, guid: b4c0fbfdd4d36244fb9362a7ca663eee, type: 3}
 --- !u!4 &1103852041
 Transform:
   m_ObjectHideFlags: 0
@@ -39312,7 +39313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71265a69db6e004bb16a0b03259e393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 3910761280751765698}
+  currentWeapon: {fileID: 4371771000634318847}
 --- !u!143 &1716935517
 CharacterController:
   m_ObjectHideFlags: 0
@@ -45339,13 +45340,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1426479932}
-          m_TargetAssemblyTypeName: GunWheel, Assembly-CSharp
-          m_MethodName: TestPointerEnter
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgumentAssemblyTypeName: 
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -45357,11 +45358,11 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1426479932}
           m_TargetAssemblyTypeName: GunWheel, Assembly-CSharp
-          m_MethodName: TestPointerUp
-          m_Mode: 1
+          m_MethodName: SelectGun
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 3910761280751765698}
+            m_ObjectArgumentAssemblyTypeName: Weapon, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -124050,7 +124051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &3910761280751765697
 AudioSource:
   m_ObjectHideFlags: 0
@@ -124362,7 +124363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &4371771000634318847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124376,7 +124377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamage: 10
-  weaponFireRate: 0.05
+  weaponFireRate: 0.1
   weaponReloadTime: 1.5
   weaponVelocity: 1
   weaponReloadTimer: 0

@@ -30,19 +30,7 @@ public class GunWheel : MonoBehaviour
 
     public void SelectGun(Weapon weapon)
     {
+        AudioManager.Instance.PlaySound(SoundType.Equip);
         player.SetNewWeapon(weapon);
-    }
-
-    //TODO: disable wheels
-
-    public void TestPointerEnter()
-    {
-        Debug.Log("Mouse on object");
-    }
-
-    public void TestPointerUp()
-    {
-        Debug.Log("Weapon selected");
-        SetWheelVisible(false);
     }
 }
