@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.AI;
 
 public class AIAttackState : AIBaseState
 {
     private AISightController aISightController;
     private AIChaseState chaseState;
-    
+
+    private Animator animator;
+
     public Inventory inventory;
     
     public NavMeshAgent agent;
@@ -17,6 +20,7 @@ public class AIAttackState : AIBaseState
     private float attackRange;
     public override void EnterState(AIStateManager bot)
     {
+        animator = bot.GetComponent<Animator>();
         aISightController = bot.GetComponent<AISightController>();
         chaseState = bot.GetComponent<AIChaseState>();
         agent = bot.GetComponent<NavMeshAgent>();
@@ -24,6 +28,7 @@ public class AIAttackState : AIBaseState
         attackRange = chaseState.attackRange;
         inventory = bot.GetComponent<Inventory>();
         agent.Stop();
+        animator.SetBool("shooting", true);
     }
 
     public override void UpdateState(AIStateManager bot)
@@ -37,12 +42,14 @@ public class AIAttackState : AIBaseState
             {
                 agent.Resume();
                 bot.SwitchState(bot.ChaseState);
+                animator.SetBool("shooting", false);
                 Debug.Log("Догоняю");
             }
             else
             {
                 agent.Resume();
                 bot.SwitchState(bot.PatrolState);
+                animator.SetBool("shooting", false);
                 Debug.Log("Патрулирую");
             }
         }
