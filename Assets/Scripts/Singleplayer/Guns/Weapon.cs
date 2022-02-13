@@ -7,7 +7,6 @@ public class Weapon : MonoBehaviour
 {
     public enum WeaponType { NONE = 0, ASSAULT = 1, DROBOVIK = 2, PULEMET = 3 };
 
-    [SerializeField] private float weaponDamage = 10f;
     [SerializeField] private float weaponFireRate = 0.05f;
     [SerializeField] private float weaponReloadTime = 1.5f;
     [SerializeField] private float weaponVelocity = 1f;
@@ -15,6 +14,7 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private int weaponType = 1;
     [SerializeField] private int weaponClipSize = 30;
+    [SerializeField] private int weaponDamage = 10;
     [SerializeField] private int weaponMaxClipSize = 30;
     [SerializeField] private int weaponAmmoInClip = 30;
     [SerializeField] private int weaponMags = 10;
