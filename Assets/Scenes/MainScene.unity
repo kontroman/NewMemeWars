@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 9b223f1b75c602345bf76569964cfd77, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &5201873 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7113174031864955074, guid: 928c1862eba550045bc9922649153b9d, type: 3}
@@ -5467,7 +5467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &182596883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5644,7 +5644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &222323722
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11183,6 +11183,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 706204213561332777, guid: f59b226023c6d7d4d849372f5de258ee, type: 3}
+      propertyPath: sightRange
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092042247962547557, guid: f59b226023c6d7d4d849372f5de258ee, type: 3}
+      propertyPath: attackRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473979002335306178, guid: f59b226023c6d7d4d849372f5de258ee, type: 3}
+      propertyPath: weaponFireRate
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473979002335306178, guid: f59b226023c6d7d4d849372f5de258ee, type: 3}
+      propertyPath: CreateDamageText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990970501498633348, guid: f59b226023c6d7d4d849372f5de258ee, type: 3}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f59b226023c6d7d4d849372f5de258ee, type: 3}
 --- !u!1 &449874531
@@ -11329,11 +11349,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8936719195439311855, guid: 55958f06db460374b92f5a8aa893e5ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.25
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8936719195439311855, guid: 55958f06db460374b92f5a8aa893e5ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 8936719195439311855, guid: 55958f06db460374b92f5a8aa893e5ff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11373,7 +11393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8936719195439413199, guid: 55958f06db460374b92f5a8aa893e5ff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55958f06db460374b92f5a8aa893e5ff, type: 3}
@@ -16856,11 +16876,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113174031847955114, guid: 928c1862eba550045bc9922649153b9d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.25
       objectReference: {fileID: 0}
     - target: {fileID: 7113174031847955114, guid: 928c1862eba550045bc9922649153b9d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 7113174031847955114, guid: 928c1862eba550045bc9922649153b9d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16900,7 +16920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113174031847955115, guid: 928c1862eba550045bc9922649153b9d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 928c1862eba550045bc9922649153b9d, type: 3}
@@ -33959,7 +33979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4f83624766465489744c4dede69653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundTime: 20
+  roundTime: 600
   onGameStop:
     m_PersistentCalls:
       m_Calls: []
@@ -39535,7 +39555,8 @@ GameObject:
   - component: {fileID: 1716935516}
   - component: {fileID: 1716935518}
   - component: {fileID: 1716935519}
-  m_Layer: 0
+  - component: {fileID: 1716935520}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39698,8 +39719,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02545a0f9fbc8c045a01f7f1ae7682e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
   maxHealth: 100
   health: 0
+  isPlayer: 1
+--- !u!114 &1716935520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716935510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577b28a06bb4d2a41860e92ce392aedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1729237380 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7113174031984967275, guid: 928c1862eba550045bc9922649153b9d, type: 3}
@@ -45309,7 +45349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde2f209340507940a22f0d871236206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthComponent: {fileID: 0}
+  HealthComponent: {fileID: 1716935519}
   player: {fileID: 1716935510}
 --- !u!1 &1986992743 stripped
 GameObject:
@@ -124523,7 +124563,7 @@ MonoBehaviour:
   weaponReloadTimer: 0
   weaponType: 3
   weaponClipSize: 50
-  weaponDamage: 10
+  weaponDamage: 25
   weaponMaxClipSize: 50
   weaponAmmoInClip: 50
   weaponMags: 5
@@ -124533,6 +124573,7 @@ MonoBehaviour:
   weaponAudioFireClip: {fileID: 8300000, guid: 5896c9fd5bcdd094c812ee639b9aecd3, type: 3}
   weaponAudioReloadClip: {fileID: 8300000, guid: 117b922832e265946a74ef5db4f4d3c8, type: 3}
   muzzleFlash: {fileID: 1547813775}
+  isControlledByPlayer: 1
   timer: 0
   weaponReloading: 0
   weaponIsFiring: 0
@@ -124749,6 +124790,7 @@ MonoBehaviour:
   weaponAudioFireClip: {fileID: 8300000, guid: db23fd8a70d1fbe498924cf686d94ba1, type: 3}
   weaponAudioReloadClip: {fileID: 8300000, guid: 117b922832e265946a74ef5db4f4d3c8, type: 3}
   muzzleFlash: {fileID: 198792768848370580}
+  isControlledByPlayer: 1
   timer: 0
   weaponReloading: 0
   weaponIsFiring: 0
@@ -125073,7 +125115,7 @@ MonoBehaviour:
   weaponReloadTimer: 0
   weaponType: 2
   weaponClipSize: 10
-  weaponDamage: 10
+  weaponDamage: 30
   weaponMaxClipSize: 10
   weaponAmmoInClip: 10
   weaponMags: 10
@@ -125083,6 +125125,7 @@ MonoBehaviour:
   weaponAudioFireClip: {fileID: 8300000, guid: e608d2ad05a0b5642aaffd2850471e06, type: 3}
   weaponAudioReloadClip: {fileID: 8300000, guid: 117b922832e265946a74ef5db4f4d3c8, type: 3}
   muzzleFlash: {fileID: 198792768454511003}
+  isControlledByPlayer: 1
   timer: 0
   weaponReloading: 0
   weaponIsFiring: 0

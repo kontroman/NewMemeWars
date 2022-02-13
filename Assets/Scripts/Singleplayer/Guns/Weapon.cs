@@ -31,6 +31,10 @@ public class Weapon : MonoBehaviour
 
     private bool firing;
 
+    [Space]
+    public bool isControlledByPlayer = false;
+    [Space]
+
     public float timer;
     public bool weaponReloading;
     public bool weaponIsFiring;
@@ -76,6 +80,7 @@ public class Weapon : MonoBehaviour
                     weaponAmmoInClip = weaponClipSize;
                     weaponReloading = !weaponReloading;
                     weaponReloadTimer = 0f;
+                    if(isControlledByPlayer)
                     GameObject.Find("Canvas").GetComponent<GameCanvas>().UpdateAmmoText(weaponAmmoInClip);
                 }
             }
@@ -97,10 +102,24 @@ public class Weapon : MonoBehaviour
                 //TODO: make -ammo event
 
                 weaponAmmoInClip -= 1;
-
+                
+                if(isControlledByPlayer)
                 GameObject.Find("Canvas").GetComponent<GameCanvas>().UpdateAmmoText(weaponAmmoInClip);
 
-                Ray weaponRay = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
+                Ray weaponRay;
+
+                if (isControlledByPlayer)
+                {
+                    weaponRay = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
+                }
+                else
+                {
+                    Vector3 fromPosition = gameObject.transform.position;
+                    Vector3 toPosition = transform.root.GetComponent<AIAttackState>().target.transform.position;
+                    Vector3 direction = toPosition - fromPosition;
+                    weaponRay = new Ray(fromPosition, direction);
+                }
+
                 RaycastHit weaponRayHit;
 
                 weaponAudioSource.PlayOneShot(weaponAudioFireClip);
@@ -110,14 +129,14 @@ public class Weapon : MonoBehaviour
 
                 if (Physics.Raycast(weaponRay, out weaponRayHit, 200))
                 {
-                    if(weaponRayHit.transform.gameObject.TryGetComponent(out Health targetHealth))
+                    if(weaponRayHit.transform.root.gameObject.TryGetComponent(out Health targetHealth))
                     {
-                        DamagePopupCreator.Instance.CreateText(new Vector3(
-                            weaponRayHit.transform.position.x,
-                            weaponRayHit.transform.position.y,
-                            weaponRayHit.transform.position.z
-                            ),
-                            weaponDamage);
+                        if (isControlledByPlayer)
+                        {
+                            DamagePopupCreator.Instance.CreateText(
+                                weaponRayHit.transform.position,
+                                weaponDamage);
+                        }
 
                         targetHealth.TakeDamage(weaponDamage);
                     }

@@ -15,9 +15,9 @@ public class DamagePopupCreator : MonoBehaviour
         else Instance = this;
     }
 
-    public void CreateText(Vector3 position, float weaponDamage)
-    {
-        GameObject text = Instantiate(DamageText, position, Quaternion.identity);
-        text.transform.GetChild(0).GetComponent<Text>().text = "" + weaponDamage;
+    public void CreateText(Vector3 position, int weaponDamage)
+    { 
+        GameObject damageCanvas = Instantiate(DamageText, position, Quaternion.identity);
+        damageCanvas.GetComponent<DamageIndicator>().SetDamageText(weaponDamage);
     }
 }
