@@ -16,7 +16,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
                 obj.name = typeof(T).Name;
                 obj.hideFlags = HideFlags.HideAndDontSave;
                 _instance = obj.AddComponent<T>();
-                DontDestroyOnLoad(obj);
+    //            DontDestroyOnLoad(obj);
             }
             return _instance;
         }
@@ -27,7 +27,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
         if (_instance == null)
         {
             _instance = this as T;
-            DontDestroyOnLoad(gameObject);
+     //       DontDestroyOnLoad(gameObject);
         }
         else
             Destroy(this);

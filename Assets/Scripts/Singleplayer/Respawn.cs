@@ -17,6 +17,7 @@ public class Respawn : MonoBehaviour
 
     void Start()
     {
+        respawnpointsBase = GameObject.Find("Waypoints");
         respawnpoints = respawnpointsBase.GetComponentsInChildren<Transform>().Skip(1).ToList();
         healthComponent = GetComponent<Health>();
         healthComponent.death += RespawnCharacterHandler;
@@ -38,13 +39,12 @@ public class Respawn : MonoBehaviour
 
     public void RespawnCharacter()
     {
-        Debug.Log("”мер");
-        characterTransform.gameObject.SetActive(false);
+      //  characterTransform.gameObject.SetActive(false);
         int respawnpointIndex = RespawnpointIndexSelection();
         Vector3 respawnpointPos = respawnpoints[respawnpointIndex].GetComponent<Transform>().position;
         characterTransform.position = respawnpointPos;
+        healthComponent.health = healthComponent.maxHealth;
         characterTransform.gameObject.SetActive(true);
-        Debug.Log("∆ив");
     }
 
     public void RespawnCharacterHandler(int amount)

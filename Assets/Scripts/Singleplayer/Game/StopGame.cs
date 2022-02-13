@@ -9,6 +9,8 @@ public class StopGame : Singleton<StopGame>
 
     public bool GameInProgress = true;
 
+    public EndGameWindow endGameWindow;
+
     private void OnEnable()
     {
         GetComponent<GameTimer>().onGameStopAction += StopGameHandler;
@@ -21,6 +23,7 @@ public class StopGame : Singleton<StopGame>
 
     public void StopGameHandler()
     {
+        endGameWindow.Call();
         GameInProgress = false;
         Camera.main.GetComponent<EditorCamera>().enabled = false;
         player.GetComponent<EditorMovement>().enabled = false;

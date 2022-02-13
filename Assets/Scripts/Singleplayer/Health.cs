@@ -36,8 +36,11 @@ public class Health : MonoBehaviour
         if(isPlayer)
         onHealthChangedAction.Invoke(health);
 
-        if (health == 0)
+        if (health <= 0)
+        {
+            gameObject.SetActive(false);
             death.Invoke(0);
+        }
     }
 
 }
