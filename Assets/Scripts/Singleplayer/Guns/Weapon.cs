@@ -129,7 +129,6 @@ public class Weapon : MonoBehaviour
 
                 if (Physics.Raycast(weaponRay, out weaponRayHit, 200))
                 {
-                    Debug.LogError(weaponRayHit.transform.gameObject.name);
                     if(weaponRayHit.transform.root.gameObject.TryGetComponent(out Health targetHealth))
                     {
                         if (isControlledByPlayer)

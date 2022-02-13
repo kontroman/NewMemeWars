@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 9b223f1b75c602345bf76569964cfd77, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &5201873 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7113174031864955074, guid: 928c1862eba550045bc9922649153b9d, type: 3}
@@ -5467,7 +5467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &182596883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5644,7 +5644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &222323722
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11337,11 +11337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8936719195439311855, guid: 55958f06db460374b92f5a8aa893e5ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.25
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 8936719195439311855, guid: 55958f06db460374b92f5a8aa893e5ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 8936719195439311855, guid: 55958f06db460374b92f5a8aa893e5ff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11381,7 +11381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8936719195439413199, guid: 55958f06db460374b92f5a8aa893e5ff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55958f06db460374b92f5a8aa893e5ff, type: 3}
@@ -16864,11 +16864,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113174031847955114, guid: 928c1862eba550045bc9922649153b9d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.25
       objectReference: {fileID: 0}
     - target: {fileID: 7113174031847955114, guid: 928c1862eba550045bc9922649153b9d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 7113174031847955114, guid: 928c1862eba550045bc9922649153b9d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16908,7 +16908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113174031847955115, guid: 928c1862eba550045bc9922649153b9d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 928c1862eba550045bc9922649153b9d, type: 3}
@@ -39651,6 +39651,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
     m_PersistentCalls:
       m_Calls: []
   maxHealth: 100
